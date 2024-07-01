@@ -1,4 +1,4 @@
-# SALSA :dancer: - A Shared Audio--Language Embedding SpAce
+# SALSA :dancer: - A Shared Audio–Language Embedding SpAce
 
 
 ### Setting up the environment
