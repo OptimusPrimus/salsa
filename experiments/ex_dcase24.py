@@ -1015,7 +1015,7 @@ def get_trainer(wandb_logger, max_epochs, max_samples_per_epoch, gpus, half_prec
 def get_callbacks(wandb_logger, monitor, enable_checkpointing):
     callbacks = []
 
-    if wandb_logger == False:
+    if wandb_logger == False or wandb_logger is None:
          print('No logger; skipping checkpoints')
     else:
         callbacks.append(LearningRateMonitor(logging_interval='epoch'))
