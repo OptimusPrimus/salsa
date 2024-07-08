@@ -217,7 +217,7 @@ def build_model_with_cfg(
         variant (str): model variant name
         pretrained (bool): load pretrained weights
         default_cfg (dict): model's default pretrained/task config
-        model_cfg (Optional[Dict]): model's architecture config
+        model_cfg (Optional[Dict]): model's external config
         feature_cfg (Optional[Dict]: feature extraction adapter config
         pretrained_strict (bool): load pretrained weights strictly
         pretrained_filter_fn (Optional[Callable]): filter callable for pretrained weights
@@ -230,7 +230,7 @@ def build_model_with_cfg(
     feature_cfg = feature_cfg or {}
     default_cfg = deepcopy(default_cfg) if default_cfg else {}
     update_default_cfg_and_kwargs(default_cfg, kwargs, kwargs_filter)
-    default_cfg.setdefault('architecture', variant)
+    default_cfg.setdefault('external', variant)
 
     # Setup for feature extraction wrapper done at end of this fn
     if kwargs.pop('features_only', False):

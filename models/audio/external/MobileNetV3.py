@@ -308,7 +308,7 @@ def _mobilenet_v3(
 def mobilenet_v3(pretrained_name: str = None, **kwargs: Any) \
         -> MN:
     """
-    Constructs a MobileNetV3 architecture from
+    Constructs a MobileNetV3 external from
     "Searching for MobileNetV3" <https://arxiv.org/abs/1905.02244>".
     """
     inverted_residual_setting, last_channel = _mobilenet_v3_conf(**kwargs)

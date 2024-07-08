@@ -1,6 +1,6 @@
 import torch
-from models.architecture.MobileNetV3 import get_model as get_mobile_net
-from models.architecture.MobileNetV3 import AugmentMelSTFT
+from models.audio.external.MobileNetV3 import get_model as get_mobile_net
+from models.audio.external.MobileNetV3 import AugmentMelSTFT
 
 
 

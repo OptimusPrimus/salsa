@@ -13,12 +13,9 @@ from data.datasets.clotho_v2 import clotho_v2, get_clotho_v2
 from data.datasets.audio_caps import audiocaps, get_audiocaps
 from data.datasets.wavcaps import wavcaps, get_wavecaps
 from data.datasets.audioset import audioset, get_audioset
-from data.datasets.audioset_keyword_captions import audioset_keyword_captiones, AudioSetKeywordCaptionsDataset, AudioSetKeywordCaptionsBADataset
-from data.datasets.gpt_augment import gpt_augment, GPTAugment
 from data.data_loader import data_loader, get_train_data_loader, get_eval_data_loader
 from sacred import Experiment
 
-from data.datasets.clotho_hard import clotho_hard, get_clotho_hard
 from pytorch_lightning.callbacks import LearningRateMonitor, ModelCheckpoint
 import torch
 from glob import glob
@@ -27,34 +24,24 @@ from utils.directories import directories, get_model_dir, get_dataset_dir
 import numpy as np
 import torch.distributed as dist
 
-from data.augment.easy_data_augmentation import easy_data_augmentation, do_easy_data_augmentation
-
 import string
 
-import nltk
 from nltk.corpus import stopwords
 
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
 
 # nltk.download('stopwords')
 stopwords = set(stopwords.words('english'))
-
-sys.path.append('../hear21passt')
 
 wandb.login()
 audio_retrieval = Experiment('audio_retrieval', ingredients=[
     directories,
     clotho_v2,
-    clotho_hard,
     audiocaps,
     wavcaps,
     data_loader,
-    gpt_augment,
-    audioset,
-    audioset_keyword_captiones,
-    easy_data_augmentation
+    audioset
 ])
-
-os.environ['TOKENIZERS_PARALLELISM'] = 'false'
 
 @audio_retrieval.config
 def default_config():
@@ -122,18 +109,6 @@ def default_config():
     # data set & augmentations
     train_on = 'clothov2'
 
-    # text augmentations
-    gpt_augment_p = 0.0
-
-    translate_augment_p = 0
-    translate_augment_languages = ['de', 'es', 'fr'] # "tr"
-
-    eda_p = 0.0
-    eda_p_swap = 0.0
-    eda_p_ins = 0.0
-    eda_p_del = 0.0
-    eda_p_syn = 0.0
-
     # optimizer
     max_epochs = 25
     max_samples_per_epoch = None
@@ -200,7 +175,7 @@ def default_config():
     distill_from=[]
 
 @audio_retrieval.capture
-def run_one(log_db_name, train_on, resume_training, max_samples_per_epoch, monitor, translate_augment_languages, gpt_augment_p, eda_p, eda_p_swap, eda_p_ins, eda_p_del, eda_p_syn, _config=None):
+def run_one(log_db_name, train_on, resume_training, _config=None):
 
     run = wandb.init(reinit=True, project='dev' if _config['fast_dev_run'] else log_db_name)
 
@@ -234,57 +209,25 @@ def run_one(log_db_name, train_on, resume_training, max_samples_per_epoch, monit
         print(f"Master node...")
         print('Logging to ', log_db_name)
         wandb_logger = WandbLogger(log_model=False, project='dev' if _config['fast_dev_run'] else log_db_name)
+
     print('Logger created')
     t = get_trainer(wandb_logger)
-    val_sets = [
-            get_eval_data_loader(val, shuffle=True, distributed=distributed) #.get_subset(lambda s: s['idx'] < 10)
-            # get_eval_data_loader(get_clotho_hard().cache_audios().set_fixed_length(30), distributed=distributed),
-            # get_eval_data_loader(get_audiocaps_before_after_hard_benchmark().cache_audios().set_fixed_length(30), distributed=distributed),
-            # get_eval_data_loader(get_audiocaps_timing_rotate_hard_benchmark().cache_audios(), distributed=distributed),
-            # get_eval_data_loader(get_audiocaps_timing_hard_benchmark().cache_audios(), distributed=distributed),
-        ]
-
-    # t.validate(model, get_eval_data_loader(test, shuffle=True, distributed=distributed))
-    # t.validate(model, val_sets)
-    # t.test(model, get_eval_data_loader(test, shuffle=True, distributed=distributed))
 
     t.fit(
         model,
         train_dataloaders=get_train_data_loader(train, targets=None),
-        val_dataloaders=val_sets,
+        val_dataloaders=[get_eval_data_loader(val, shuffle=True, distributed=distributed)],
         ckpt_path=str(os.path.join(get_model_dir(), resume_training, 'last.ckpt')) if resume_training else None
     )
-
     t.test(model, get_eval_data_loader(test, shuffle=True, distributed=distributed))
-
-    # cmd_generate_embeddings(model)
-
-    print('Initialize model...')
-    #model = model.cuda()
-    #model.eval()
-
-    #metrics = run_clotho_hard_benchmark(model, "timing")
-    #model.log('benchmark/clotho_hard_timing', metrics['accuracy_timing'])
-
-    #metrics = run_clotho_hard_benchmark(model, "completeness")
-    #model.log('benchmark/clotho_hard_completeness', metrics['accuracy_completeness'])
-
-    #metrics = run_clotho_text_reconstruction_benchmark(model, condition_on_text=False)
-    #model.log('benchmark/clotho_text_reconstruction_audio', metrics['val/accuracy'])
-
-    #metrics = run_clotho_text_reconstruction_benchmark(model, condition_on_text=True)
-    #model.log('benchmark/clotho_text_reconstruction_text', metrics['val/accuracy'])
-
     return 0
 
 
 @audio_retrieval.capture
 def get_data_set(data_set_id, mode, _config):
-    # load training files and audio WAVs if necesary
-    if data_set_id == 'clothov2' or (data_set_id in ['wavcaps'] and mode != 'train'):
-        assert mode in ['train', 'val', 'evl', 'test', 'analysis']
+    if data_set_id == 'clothov2' or (data_set_id in ['wavcaps', 'all'] and mode != 'train'):
+        assert mode in ['train', 'val', 'test', 'analysis']
         ds = get_clotho_v2(mode)
-        # ds.compress = False
         ds.set_fixed_length(30)
     elif data_set_id == 'audiocaps':
         assert mode in ['train', 'val', 'test']
@@ -295,17 +238,13 @@ def get_data_set(data_set_id, mode, _config):
         ds.compress = True
         ds.set_fixed_length(30)
     elif data_set_id == 'all':
-        if mode == "train":
-            ds = ConcatDataset(
-                [
-                    get_clotho_v2('train'),
-                    get_audiocaps('train'),
-                    get_wavecaps()
-                ]
-            )
-        else:
-            ds =get_clotho_v2(mode)
-
+        ds = ConcatDataset(
+            [
+                get_clotho_v2('train'),
+                get_audiocaps('train'),
+                get_wavecaps()
+            ]
+        )
         ds.set_fixed_length(30)
     else:
         raise NotImplementedError(f'Data set {data_set_id} unknown.')
@@ -389,22 +328,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
         sentence_layers.pop()
         self.project_sentence = torch.nn.Sequential(*sentence_layers)
-
-        if self.kwargs['use_separate_metadata_embedding_model']:
-            print('loading separate metadata encoder')
-            self.metadata_embedding_model, _, _ = get_sentence_embedding_model(self.kwargs['sentence_features']['model'])
-
-            layer_sizes = [text_output_size]
-            layer_sizes += [self.kwargs['sentence_features']['adopt_layer_size']] * self.kwargs['sentence_features'][
-                'adopt_n_layers']
-            layer_sizes += [self.kwargs['shared_representation_size']]
-            sentence_layers = []
-            for i, o in zip(layer_sizes[:-1], layer_sizes[1:]):
-                sentence_layers.append(torch.nn.Linear(i, o))
-                sentence_layers.append(torch.nn.ReLU())
-
-            sentence_layers.pop()
-            self.project_metadata = torch.nn.Sequential(*sentence_layers)
 
 
         initial_tau = torch.zeros((1,)) + self.kwargs['initial_tau']
@@ -571,7 +494,7 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
         return batch
 
-    def forward_sentence(self, batch, metadata=False):
+    def forward_sentence(self, batch):
 
         device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
@@ -582,9 +505,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
                 b = b[0]
             if self.kwargs['sentence_features']['remove_punctuation']:
                 captions.append(b.lower().translate(str.maketrans('', '', string.punctuation)))
-
-        if self.training:
-            captions = do_easy_data_augmentation(captions)
 
         tokenized = self.tokenizer(
             captions,
@@ -600,14 +520,8 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
         with torch.set_grad_enabled(not self.kwargs['sentence_features']['frozen']):
             if self.kwargs['sentence_features']['frozen']:
-                if metadata:
-                    self.metadata_embedding_model.eval()
-                else:
-                    self.sentence_embedding_model.eval()
-            if metadata:
-                token_embeddings = self.metadata_embedding_model(input_ids=batch['input_ids'], attention_mask=batch['attention_mask'])[0]
-            else:
-                token_embeddings = self.sentence_embedding_model(input_ids=batch['input_ids'], attention_mask=batch['attention_mask'])[0]
+                self.sentence_embedding_model.eval()
+            token_embeddings = self.sentence_embedding_model(input_ids=batch['input_ids'], attention_mask=batch['attention_mask'])[0]
 
         batch['sentence_features'] = token_embeddings
         batch['sentence_features_mask'] = batch['attention_mask']
@@ -635,10 +549,7 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
         batch['raw_sentence_features'] = torch.nn.functional.dropout(batch['sentence_features'], p=self.kwargs['projection_dropout'])
         batch['sentence_features'] = torch.nn.functional.dropout(batch['sentence_features'], p=self.kwargs['projection_dropout'])
 
-        if metadata:
-            batch['sentence_features'] = self.project_metadata(batch['sentence_features'])
-        else:
-            batch['sentence_features'] = self.project_sentence(batch['sentence_features'])
+        batch['sentence_features'] = self.project_sentence(batch['sentence_features'])
 
         return batch
 
@@ -690,29 +601,8 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
     def forward(self, batch):
 
-        if self.kwargs['use_keywords'] or self.kwargs['use_captions']:
-            assert not (self.kwargs['use_keywords'] and self.kwargs['use_captions'])
-            if self.kwargs['use_keywords']:
-                keyword_captions = [" ".join(c.split(";")) for c in batch['keywords']]
-                if self.kwargs['add_filename_to_keywords']:
-                    keyword_captions.append(self.process_filename(batch['path'].split(os.sep)[-1].split('.')[0]))
-            else:
-                keyword_captions = batch['caption_other'] # [" ".join(c.split(";")) for c in ]
-
-            if self.kwargs['use_separate_metadata_embedding_model']:
-                batch_ = self.forward_sentence({'caption': keyword_captions}, metadata=True)
-            else:
-                batch_ = self.forward_sentence({'caption': keyword_captions})
-
-            ### forward audio
-            batch = self.forward_audio(batch)
-            if not self.kwargs['ablate_audio_embedding']:
-                batch['audio_features'][:, 0] = batch['audio_features'][:, 0] + batch_['sentence_features'][:, 0]
-            else:
-                batch['audio_features'][:, 0] = batch_['sentence_features'][:, 0]
-        else:
-            ### forward audio
-            batch = self.forward_audio(batch)
+        ### forward audio
+        batch = self.forward_audio(batch)
 
         ### forward audio features
         batch = self.forward_sentence(batch)
@@ -788,12 +678,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
             loss = self.kwargs['loss_weight'] * loss + self.kwargs['distill_weight'] * distill_loss
 
-        # loss = loss + self.forward_timing(batch)
-
-        #if self.kwargs['audio_reconstruction_weight'] > 0:
-        #    arl = self.arl(batch)
-        #    self.log('train/audio_reconstruction_loss', arl.item())
-        #    loss = loss + self.kwargs['audio_reconstruction_weight'] * arl
         return loss
 
 
@@ -803,10 +687,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
             mode = 'test'
         with torch.no_grad():
             audio_features, sentence_features, audio_mask, sentence_mask = self(batch)
-
-        #if self.kwargs['audio_reconstruction_weight'] > 0:
-        #    arl = self.arl(batch)
-        #    self.log(f'{mode}/audio_reconstruction_loss', arl.item())
 
         args = {
             'audio_features': copy.deepcopy(audio_features[:, :2].detach()),
@@ -876,8 +756,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
             for o in outputs:
                 self.validation_epoch_end(o, mode='val')
             return
-
-        # run_clotho_text_reconstruction_benchmark(self)
 
         import numpy as np
         paths = [p for b in outputs for p in b['path']]
@@ -988,25 +866,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
         self.log(f'{mode}/R@5', r_5, add_dataloader_idx=False, sync_dist=True)
         self.log(f'{mode}/R@10', r_10, add_dataloader_idx=False, sync_dist=True)
         self.log(f'{mode}/mAP@10', mAP, add_dataloader_idx=False, sync_dist=True)
-        # {" ".join(keywords[int(j * n_captions)].split(;))}
-        # columns = ['caption', 'expected'] + [f"audio_{i}" for i in range(10)]
-        # data = [[captions[i], wandb.Html(f'{i == i}<br>{html[i]}<br>{" ".join(keywords[i].split(";"))}')] + [wandb.Html(f'{j == (i // n_captions)}<br>{html[int(j * n_captions)]}<br>{" ".join(keywords[int(j * n_captions)].split(";"))}') for j in top_ten[i]] for i in range(C.shape[1])]
-        # if self.logger is not None:
-        #     self.logger.log_table("retrieved_audios", columns=columns, data=data)
-
-        # data = [(w, ) + eval_words(top_ten, target, captions, w) for w, _ in c.most_common(100)]
-
-        # table = wandb.Table(data=[[d[0], d[1]] for d in data], columns=["label", "value"])
-        # self.logger.experiment.log({f'{mode}/map_per_word': wandb.plot.bar(table, "label", "value", title="mAP")})
-
-        # table = wandb.Table(data=[[d[0], d[2]] for d in data], columns=["label", "value"])
-        # self.logger.experiment.log({f'{mode}/r@1_per_word': wandb.plot.bar(table, "label", "value", title="r@1")})
-
-        # table = wandb.Table(data=[[d[0], d[3]] for d in data], columns=["label", "value"])
-        # self.logger.experiment.log({f'{mode}/r@5_per_word': wandb.plot.bar(table, "label", "value", title="r@5")})
-
-        # table = wandb.Table(data=[[d[0], d[4]] for d in data], columns=["label", "value"])
-        # self.logger.experiment.log({f'{mode}/r@10_per_word': wandb.plot.bar(table, "label", "value", title="r@10")})
 
         self.validation_outputs.clear()
 
@@ -1142,7 +1001,7 @@ def get_trainer(wandb_logger, max_epochs, max_samples_per_epoch, gpus, half_prec
         callbacks=get_callbacks(wandb_logger),
         precision=16 if half_precision else 32,
         limit_train_batches=1.0 if max_steps_per_epoch <= 0 else max_steps_per_epoch // gpus,
-        limit_val_batches=1.0 , #max_steps_per_epoch if fast_dev_run else 1.0,
+        limit_val_batches=1.0,
         reload_dataloaders_every_n_epochs=1 if max_steps_per_epoch > 0 else 0,
         num_sanity_val_steps=0,
         accumulate_grad_batches=accumulate_grad_batches,
@@ -1156,9 +1015,8 @@ def get_trainer(wandb_logger, max_epochs, max_samples_per_epoch, gpus, half_prec
 def get_callbacks(wandb_logger, monitor, enable_checkpointing):
     callbacks = []
 
-    if wandb_logger == False: # or callable(wandb_logger.experiment.name):
+    if wandb_logger == False:
          print('No logger; skipping checkpoints')
-    #     return []
     else:
         callbacks.append(LearningRateMonitor(logging_interval='epoch'))
 
@@ -1222,8 +1080,6 @@ def cmd_generate_embeddings(model=None, load_parameters=None, train_on=None):
                     p = os.path.sep.join(p.split(os.path.sep)[l:]) # remove dataset dir
                     audio_embeddings[p] = copy.deepcopy(a[i, 0].detach().cpu())
                     sentence_embeddings[b['caption'][i]] = copy.deepcopy(s[i, 0].detach().cpu().clone())
-
-    print(len(audio_embeddings))
 
     out_path = os.path.join(get_model_dir(), load_parameters)
 

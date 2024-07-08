@@ -144,42 +144,10 @@ class Clotho_v2Dataset(DatasetBaseClass):
 if __name__ == '__main__':
     import torch
     from sacred import Experiment
-    from data.datasets.audio_caps import audiocaps, get_audiocaps
-    from data.datasets.audio_caps_before_after import audiocaps_before_after, get_audiocaps_before_after
-    from data.datasets.dataset_base_classes import ConcatDataset
 
-    ex = Experiment(ingredients=[clotho_v2, audiocaps, audiocaps_before_after])
+    ex = Experiment(ingredients=[clotho_v2])
     @ex.automain
     def main(_config):
         train = get_clotho_v2('train')
-
-        # test = test.cache_audios().set_fixed_length(30)
-        # t.est = test.get_subset(lambda x: 'before' in x['caption'] or 'after' in x['caption'])
-        # train.set_quick()
-        # train.cache_audios()
-        captions = [train[i]['caption_hard'] for i in range(len(train))]
-
-        after = 0
-        before = 0
-        followed_by = 0
-        for c in captions:
-            if 'after ' in c: after += 1
-            if 'followed by' in c: followed_by += 1
-            if 'before ' in c: before += 1
-
-        ds = get_clotho_v2('test', os.path.join('/home/paul/shared/clotho_v2'))
-        ds.cache_audios()
-        ds = get_clotho_v2('test', os.path.join('/home/paul/shared/clotho_v2'))
-        ds.cache_audios()
-
-        ds = get_clotho_v2('train', os.path.join('/home/paul/shared/clotho_v2'))
-        ds.set_quick(True)
-        ds.cache_audios()
-        ds = get_clotho_v2('val', os.path.join('/home/paul/shared/clotho_v2'))
-        ds.cache_audios()
-        ds = get_clotho_v2('test', os.path.join('/home/paul/shared/clotho_v2'))
-        ds.cache_audios()
-
-    ex.run(config_updates={'clotho_v2': {'add_hard_negatives': True}, 'audiocaps_before_after': {'balance_before_after': True}})
 
 

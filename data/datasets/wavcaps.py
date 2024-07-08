@@ -26,9 +26,14 @@ def get_wavecaps(folder_name, exclude_clothov2):
     if exclude_clothov2:
         with open(os.path.join(path, 'dcase2024_task6_excluded_freesound_ids.csv'), 'r') as f:
             ids = set([r[0] for r in csv.reader(f)][1:])
+            before_len = len(wc)
             print("WavCaps before filtering ClothoV2:", len(wc))
-            wc = wc.get_subset(lambda s: not(s['path'].split(os.sep)[-2] == 'FreeSound' and s['path'].split(os.sep)[-1].split('.')[0] in ids))
+            wc = wc.get_subset(
+                lambda s: not(s['path'].split(os.sep)[-2] == 'FreeSound' and s['path'].split(os.sep)[-1].split('.')[0] in ids)
+            )
+            after_len = len(wc)
             print("WavCaps after filtering ClothoV2:", len(wc))
+            assert after_len < before_len
     return wc
 
 
@@ -159,51 +164,9 @@ class WaveCaps(DatasetBaseClass):
 if __name__ == '__main__':
     from sacred import Experiment
     from data.datasets.clotho_v2 import clotho_v2, get_clotho_v2
-    from data.datasets.audio_caps import audiocaps, get_audiocaps
-    from data.datasets.audioset import audioset, get_audioset
-    from data.audio_loader import LoadMP3CompressedIntoRam
-    ex = Experiment('test', ingredients=[wavcaps, audiocaps, audioset, clotho_v2])
+    ex = Experiment('test', ingredients=[wavcaps])
 
     @ex.main
     def main_():
         wc = get_wavecaps().set_quick()
-        # wc = wc.cache_audios()
-        ss = wc.get_subset(lambda x: 'FreeSound' in x['path'])
-        # wc.set_fixed_length(30)
-
-        #from torch.utils.data import Subset
-        #import numpy as np
-        #dl = torch.utils.data.DataLoader(Subset(wc, np.arange(258180, len(wc))), 10, num_workers=16)
-
-        #from tqdm import tqdm
-        #for b in tqdm(dl):
-        #    continue
-
-        # a = get_audioset('evaluation')
-        train = ['/' + "/".join(s['sound_link'].split('/')[3:]) + '/' for s in get_clotho_v2('train').set_quick() if type(s['sound_link']) is str]
-        val = ['/' + "/".join(s['sound_link'].split('/')[3:]) + '/' for s in get_clotho_v2('val').set_quick()  if type(s['sound_link']) is str]
-        test = ['/' + "/".join(s['sound_link'].split('/')[3:]) + '/' for s in get_clotho_v2('test').set_quick() if type(s['sound_link']) is str]
-
-        urls = set([w['url'] for w in wc])
-
-
-        len(urls.intersection(set(train))) / len(train)
-        len(urls.intersection(set(val))) / len(val)
-        len(urls.intersection(set(test))) / len(test)
-
-
-        #missing = []
-        #for s in wc:
-        #    if not os.path.exists(s['path']):
-        #        print(s['path'])
-        #        missing.append(s['path'])
-
-        #import json
-        #print("missing", len(missing))
-        #with open('missing_files.json', 'w') as f:
-        #    json.dump(missing, f)
-
-        # wc = LoadMP3CompressedIntoRam(wc, sample_rate=32000, processes=16, compress=True, shared=False)
-        # print("Finished creating wavecaps....")
-
     ex.run()

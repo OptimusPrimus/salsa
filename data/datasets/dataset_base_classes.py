@@ -14,7 +14,6 @@ from typing import List, NoReturn, Dict, Union
 
 from utils.directories import directories, get_persistent_cache_dir, get_ram_cache_dir
 
-
 audio_dataset = Ingredient('audio_dataset', ingredients=[directories])
 
 os.environ["HDF5_USE_FILE_LOCKING"] = "FALSE"
@@ -443,12 +442,4 @@ if __name__ == '__main__':
         ds__ = Subset(ds, [0, 5, 10])
         ds__[0]
         ds.cache_audios()
-        s = ds
-        samples = [s for s in ds]
-        print(samples)
-
-        keywords = [s['keywords'].split(';') for s in samples][::5]
-
-        import itertools
-        keywords = list(itertools.chain(*keywords))
     ex.run()

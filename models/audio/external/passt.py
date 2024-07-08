@@ -16,7 +16,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from timm.models.layers.helpers import to_2tuple
 
-from models.architecture.helpers.vit_helpers import DropPath, trunc_normal_, build_model_with_cfg
+from models.audio.external.helpers.vit_helpers import DropPath, trunc_normal_, build_model_with_cfg
 
 from sacred import Ingredient
 passt = Ingredient('passt')
@@ -24,7 +24,7 @@ passt = Ingredient('passt')
 
 @passt.config
 def config():
-    # model architecture
+    # model external
     pretrained_weights = True
     model_id = 'passt_deit_bd_p16_384'
     c_patchout = 0
@@ -995,7 +995,7 @@ def get_model(
         c_patchout=0
         ):
     """
-    :param arch: Base ViT or Deit architecture
+    :param arch: Base ViT or Deit external
     :param pretrained: use pretrained model on imagenet
     :param n_classes: number of classes
     :param in_channels: number of input channels: 1 for mono

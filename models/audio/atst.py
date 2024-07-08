@@ -1,15 +1,13 @@
 import os
 import torch
-import torch.nn as nn
-from models.architecture.atst.audio_transformer import FrameASTModel
+from models.audio.external.atst.audio_transformer import FrameASTModel
 
 from torchaudio.transforms import AmplitudeToDB, MelSpectrogram
-from models.architecture.atst.frequency_warping import RandomResizeCrop
+from models.audio.external.atst.frequency_warping import RandomResizeCrop
 
 from utils.directories import directories, get_pretrained_model_dir
 
 from sacred import Ingredient
-import torchaudio.transforms as T
 
 atst = Ingredient('atst', ingredients=[directories])
 
