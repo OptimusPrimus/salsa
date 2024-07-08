@@ -50,7 +50,7 @@ def default_config():
 
     # model loading and saving
     load_parameters = None
-    load_last = 'last'
+    load_last = 'best'
     resume_training = None
 
     audio_features = {
@@ -1088,12 +1088,13 @@ def cmd_generate_embeddings(model=None, load_parameters=None, train_on=None):
 
 
 @audio_retrieval.command
-def cmd_test_on_clothov2(load_parameters):
+def cmd_test_on_clothov2(load_model):
     print('Initialize model...')
-    model = get_model(load_parameters)
+    print(load_model)
+    model = AudioRetrievalModel.load_from_checkpoint(load_model)
+
     model = model.cuda()
     model.eval()
-    model.experiment_name = load_parameters
     t = get_trainer(False)
 
     predict = get_data_set('clothov2', 'test')
@@ -1101,6 +1102,7 @@ def cmd_test_on_clothov2(load_parameters):
 
     print(result)
     return result[0]
+
 
 def multiprocessing_run(rank, word_size, pernode=None):
     import socket
