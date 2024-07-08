@@ -28,9 +28,9 @@ Ensemble the checkpoint with this command
 cat passt_roberta.*.ckpt > passt_roberta.ckpt
 ```
 
-And then, use this command to test the data
+And then, use this command to test on the ClothoV2 benchmark
 ```
-CUDA_VISIBLE_DEVICES=2 python -m experiments.ex_dcase24 cmd_test_on_clothov2 with \
+CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 cmd_test_on_clothov2 with \
 data_loader.batch_size_eval=32 \
 audio_features.segment_length=10 \
 audio_features.model=passt \
