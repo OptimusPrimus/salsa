@@ -1,4 +1,5 @@
-# SALSA :hot_pepper: :tomato: :dancer: - A Shared Audio–Language Embedding Space for Audio Retrieval
+# SALSA :hot_pepper: :tomato: :dancer:
+## A Shared Audio–Language Embedding Space for Audio Retrieval
 
 DISCLAIMER: Work in progress
 
