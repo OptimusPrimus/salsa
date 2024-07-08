@@ -1,15 +1,13 @@
 import torch
 import pandas as pd
 import os
-from augment.hard_negative_timing import get_hard_negative
 from sacred import Ingredient
-from data.datasets.esc import esc, get_esc_data_set
 from utils.directories import directories, get_dataset_dir
 from data.datasets.dataset_base_classes import audio_dataset, DatasetBaseClass
 
 SPLITS = ['development', 'validation', 'evaluation']
 
-clotho_v2 = Ingredient('clotho_v2', ingredients=[directories, audio_dataset, esc])
+clotho_v2 = Ingredient('clotho_v2', ingredients=[directories, audio_dataset])
 
 
 @clotho_v2.config
@@ -120,7 +118,7 @@ class Clotho_v2Dataset(DatasetBaseClass):
         for k in attributes:
             audio[k] = attributes[k]
         audio['idx'] = item
-        audio['caption_hard'] = get_hard_negative(audio['caption'], ablate_while=self.ablate_while) if self.add_hard_negatives else ''
+        audio['caption_hard'] = '' # get_hard_negative(audio['caption'], ablate_while=self.ablate_while) if self.add_hard_negatives else ''
 
         if audio['caption_hard'] != '' and self.hard_negatives.get(item):
             hard_index = torch.randint(len(self.hard_negatives.get(item)), (1,)).item()
