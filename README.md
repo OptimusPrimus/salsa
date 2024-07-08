@@ -57,19 +57,3 @@ Download links for the data sets:
 
 ### Training
 (TODO)
-
-stage 1
-```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510 
-
-```
-
-create embeddings
-```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510 
-```
-
-stage 2
-```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510
-```
