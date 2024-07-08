@@ -1,6 +1,6 @@
 import torch
-from hear21passt.base import get_model_passt
-from hear21passt.base import AugmentMelSTFT
+from models.audio.external.hear21passt.hear21passt.base import get_model_passt
+from models.audio.external.hear21passt.hear21passt.base import AugmentMelSTFT
 
 
 def get_passt(model_name, s_patchout_t=0, s_patchout_f=0, freqm=48, timem=192, return_sequence=False, **kwargs):
