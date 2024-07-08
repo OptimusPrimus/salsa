@@ -1087,6 +1087,21 @@ def cmd_generate_embeddings(model=None, load_parameters=None, train_on=None):
     torch.save(audio_embeddings, os.path.join(out_path, train_on + '_audio_embeddings_train.pt'))
 
 
+@audio_retrieval.command
+def cmd_test_on_clothov2(load_parameters):
+    print('Initialize model...')
+    model = get_model(load_parameters)
+    model = model.cuda()
+    model.eval()
+    model.experiment_name = load_parameters
+    t = get_trainer(False)
+
+    predict = get_data_set('clothov2', 'test')
+    result = t.test(model, get_eval_data_loader(predict, shuffle=True, distributed=False))
+
+    print(result)
+    return result[0]
+
 def multiprocessing_run(rank, word_size, pernode=None):
     import socket
     print("rank ", rank, os.getpid(), "hash=", hash("kk test"), " on node ", socket.gethostname())

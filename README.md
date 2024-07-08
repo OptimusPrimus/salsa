@@ -1,6 +1,6 @@
-# SALSA :hot_pepper: :tomato: :dancer: - a Shared Audio–Language embedding Space for Audio retrieval
+# SALSA :hot_pepper: :tomato: :dancer: - A Shared Audio–Language Embedding Space for Audio Retrieval
 
-- state of the art
+DISCLAIMER: Work in progress
 
 This repository contains the code to our submission to the DCASE Workshop & Challenge 2024.
 
@@ -36,16 +36,16 @@ Download links for the data sets:
 
 stage 1
 ```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed= 
+CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510 
 
 ```
 
 create embeddings
 ```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed= 
+CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510 
 ```
 
 stage 2
 ```
-CUDA_VISIBLE_DEVICES=0 python -m ... seed= 
+CUDA_VISIBLE_DEVICES=0 python -m ... seed=144272510
 ```
