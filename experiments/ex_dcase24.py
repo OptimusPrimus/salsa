@@ -395,6 +395,7 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
                     self.sentence_embeddings[k] = e
 
         self.experiment_name = 'none'
+        self.store_predictions = True
 
     def forward_audio(self, batch, y=None, y_mask=None):
 
@@ -828,7 +829,7 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
                 )
             C[:, i:i+1] = C_.T
 
-        if self.trainer.is_global_zero:
+        if self.trainer.is_global_zero and self.store_predictions:
             print(self.logger)
             experiment_name = self.experiment_name if not self.logger else self.logger.experiment.name
             path = os.path.join(get_model_dir(), experiment_name)
@@ -1092,7 +1093,7 @@ def cmd_test_on_clothov2(load_model):
     print('Initialize model...')
     print(load_model)
     model = AudioRetrievalModel.load_from_checkpoint(load_model)
-
+    model.store_predictions = False
     model = model.cuda()
     model.eval()
     t = get_trainer(None)
