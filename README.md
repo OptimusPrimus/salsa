@@ -15,7 +15,7 @@ Create environment:
 - `conda env create -f environment.yml`
 - `CFLAGS='-O3 -march=native' pip install https://github.com/f0k/minimp3py/archive/master.zip`
 
-Download the ClothoV2
+Download ClothoV2
 - run `scripts/download_clothov2.sh` and copy resulting folder (called `clothov2`) to desired location
 - (TODO) same for AudioCaps and WavCaps
 
