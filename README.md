@@ -15,10 +15,11 @@ Create environment:
 - `conda env create -f environment.yml`
 - `CFLAGS='-O3 -march=native' pip install https://github.com/f0k/minimp3py/archive/master.zip`
 
-Download the Datasets & ... 
-- (TODO) 
+Download the ClothoV2
+- run `scripts/download_clothov2.sh` and copy resulting folder (called `clothov2`) to desired location
+- (TODO) same for AudioCaps and WavCaps
 
-## Test our pre-trained model on the ClothoV2 benachmark
+## Test our pre-trained model on the ClothoV2 benchmark
 
 A checkpoint of the model is available here: 
 https://cloud.cp.jku.at/index.php/s/ZZkWXQ7f3aXRXYW
@@ -37,23 +38,3 @@ audio_features.model=passt \
 sentence_features.model=roberta-large \
 load_model=passt_roberta.ckpt
 ```
-
-
-## Train your own classifier
-(TODO)
-
-
-### Download the datasets
-(TODO)
-
-The default directory for datasets is `~/shared`. Change this by setting `directories.data_dir` to the folder that contains the datasets.
-
-Download links for the data sets:
-- ClothoV2 https://zenodo.org/records/4743815
-- AudioCaps (captions only) https://github.com/cdjkim/audiocaps
-- WavCaps https://huggingface.co/datasets/cvssp/WavCaps
-- WavCaps Excluded List: https://dcase.community/documents/challenge2024/dcase2024_task6_excluded_freesound_ids.csv
-
-
-### Training
-(TODO)
