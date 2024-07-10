@@ -6,10 +6,11 @@ DISCLAIMER: Work in progress :construction_worker: :nut_and_bolt:
 This repository contains the code to our submission [1, 2] to [task 8](https://dcase.community/challenge2024/task-language-based-audio-retrieval) [3] of the DCASE Workshop & Challenge 2024.
 
 
-![Alt text](./figure.svg)
-
-Our system (illustrated in the figure above) transforms audio and descriptions into the shared audio–caption embedding space via the audio and description embedding models $\phi_\mathrm{a}$ and $\phi_\mathrm{c}$, respectively. 
+Our system (illustrated in the figure below) transforms audio and descriptions into the shared audio–caption embedding space via the audio and description embedding models $\phi_\mathrm{a}$ and $\phi_\mathrm{c}$, respectively. 
 In stage 1, we assume that audio $a_i$ and caption $c_j$ do not match if $i \neq j$ and train the model with contrastive loss $\mathcal{L}_{\textrm{sup}}$.
+
+
+<img src="figure.png" alt="drawing" width="400"/>
 
 ## Setting up the environment
 
