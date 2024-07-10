@@ -11,19 +11,16 @@ Our submission [2] to the DCASE Challenge 2024 based on the proposed method, too
 Audio retrieval systems are typically trained on audio–caption datasets (e.g., ClothoV2 [4]), which contain pairs of audios and corresponding descriptions $\\{ (a_i, c_i)\\}_{N=1 \dots N}$.
 Unfortunately, the pairwise correspondence between audio $i$ and caption $j$ is not known for the case $i \neq j$; it is therefor common practice (e.g., during contrastive training and during evaluation) to assume that these pairs do not match.
 
-However, relying on this assumption is not ideal. The following paragraphs show two queries and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
+However, relying on this assumption is not ideal. The following paragraphs show a query and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
 - Recordings marked with :white_check_mark: are associated with the description ($i = j$), whereas 
 - recordings marked with :grey_question: are associated with another caption ($i \neq j$); we thus do not know if the caption describes the audio.
 
 (Hint: Use CLTR + click to open the recording in a new tab)
 
-**Query 1:** A large gathering of people are talking loudly with each other. \
+**Query:** A large gathering of people are talking loudly with each other. \
 **Results:** :grey_question: <a href='https://freesound.org/people/ivolipa/sounds/344952' target='_blank'>rank 1</a>, :grey_question: <a href='https://freesound.org/people/cognito perceptu/sounds/57595' target='_blank'>rank 2</a>, :grey_question: <a href='https://freesound.org/people/dobroide/sounds/352819' target='_blank'>rank 3</a>, :grey_question: <a href='https://freesound.org/people/northern87/sounds/88530/' target='_blank'>rank 4</a>, :white_check_mark: <a href='https://freesound.org/people/HBSA/sounds/158513' target='_blank'>rank 5</a>
 
-**Query 2:** A bunch of birds and other wildlife are making their various noises and sounds. \
-**Results:** :grey_question: <a href='https://freesound.org/people/RTB45/sounds/366669' target='_blank'>rank 1</a>, :grey_question: <a href='https://freesound.org/people/acclivity/sounds/38956' target='_blank'>rank 2</a>, :grey_question: <a href='https://freesound.org/people/kvgarlic/sounds/187763' target='_blank'>rank 3</a>, :grey_question: <a href='https://freesound.org/people/inchadney/sounds/98470' target='_blank'>rank 4</a>, :grey_question: <a href='https://freesound.org/people/adejabor/sounds/157962' target='_blank'>rank 5</a>
-
-This illustrates that $a_i$ and $c_j$ can match, even if $i \neq j$.
+All audio recordings marked with :grey_question: actually match the description, and should not be treated as non-matching audio recordings during training.
 We thus argue that additional correspondence annotations are required to give better guidance during training.
 
 ## Estimating Audio–Caption Correspondences
