@@ -23,11 +23,7 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 **Query 1:** A large gathering of people are talking loudly with each other. \
 **Results:**
-:x: [rank 1](https://freesound.org/people/ivolipa/sounds/344952), 
-:x: [rank 2](https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595), 
-:x: [rank 3](https://freesound.org/people/dobroide/sounds/352819), 
-:x: [rank 4](https://freesound.org/people/northern87/sounds/88530/), 
-:white_check_mark: [rank 5](https://freesound.org/people/HBSA/sounds/158513)
+:x: [rank 1](https://freesound.org/people/ivolipa/sounds/344952), :x: [rank 2](https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595), :x: [rank 3](https://freesound.org/people/dobroide/sounds/352819), :x: [rank 4](https://freesound.org/people/northern87/sounds/88530/), :white_check_mark: [rank 5](https://freesound.org/people/HBSA/sounds/158513)
 
 
 **Query 1:** A bunch of birds and other wildlife are making their various noises and sounds. \
