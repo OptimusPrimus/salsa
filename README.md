@@ -21,8 +21,9 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 
 Use CLTR + click to open the recording in a new tab. 
-- :white_check_mark: is the ground truth audio recording in clothoV2 file
-- :x: is another recording
+The following paragraphs illustrate queries and the top-5 matched audio recordings from the ClothoV2 test set.Recordings marked with
+- :white_check_mark: are the associated with the caption ($i = j$), and recordings marked with 
+- :x: are associate with another caption ($i \new j$)
 
 **Query 1:** A large gathering of people are talking loudly with each other. \
 **Results:** :x: <a href='https://freesound.org/people/ivolipa/sounds/344952' target='_blank'>rank 1</a>, :x: <a href='https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595' target='_blank'>rank 2</a>, :x: <a href='https://freesound.org/people/dobroide/sounds/352819' target='_blank'>rank 3</a>, :x: <a href='https://freesound.org/people/northern87/sounds/88530/' target='_blank'>rank 4</a>, :white_check_mark: <a href='https://freesound.org/people/HBSA/sounds/158513' target='_blank'>rank 5</a>
