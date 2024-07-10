@@ -16,6 +16,20 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 <img src="figure.png" alt="system illustration" width="400"/>
 </p>
 
+
+## Example
+Query: A large gathering of people are talking loudly with each other.
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/344952/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/57595/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/352819/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/88530/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/158513/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/362353/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/179777/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/261472/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/260062/simple/small/" width="375" height="30"></iframe>
+<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/326111/simple/small/" width="375" height="30"></iframe>
+
 ## Setting up the environment
 
 Create environment:
