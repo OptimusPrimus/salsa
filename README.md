@@ -15,7 +15,7 @@ However, relying on this assumption is not ideal. The following paragraphs show 
 - :white_check_mark: are described by the caption ($i = j$), whereas recordings marked with 
 - :question: are associate with another caption ($i \neq j$); we do not know if the caption describes the audio.
 
-(Hint: Use CLTR + click to open the recording in a new tab; unfortunately, GitHub flavoured markdown does not support iframes and audio tags :cry:)
+(Hint: Use CLTR + click to open the recording in a new tab)
 
 **Query 1:** A large gathering of people are talking loudly with each other. \
 **Results:** :question: <a href='https://freesound.org/people/ivolipa/sounds/344952' target='_blank'>rank 1</a>, :question: <a href='https://freesound.org/people/cognito perceptu/sounds/57595' target='_blank'>rank 2</a>, :question: <a href='https://freesound.org/people/dobroide/sounds/352819' target='_blank'>rank 3</a>, :question: <a href='https://freesound.org/people/northern87/sounds/88530/' target='_blank'>rank 4</a>, :white_check_mark: <a href='https://freesound.org/people/HBSA/sounds/158513' target='_blank'>rank 5</a>
