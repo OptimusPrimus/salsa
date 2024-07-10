@@ -20,10 +20,15 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 ## Example
 
 
+Use CLTR + click to open the recording in a new tab. 
+- :white_check_mark: is the ground truth audio recording in clothoV2 file
+- :x: is another recording
 
-**Query 1:** A bunch of birds and other wildlife are making their various noises and sounds. \
+**Query 1:** A large gathering of people are talking loudly with each other. \
+**Results:** :x: <a href='https://freesound.org/people/ivolipa/sounds/344952' target='_blank'>rank 1</a>, :x: <a href='https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595' target='_blank'>rank 2</a>, :x: <a href='https://freesound.org/people/dobroide/sounds/352819' target='_blank'>rank 3</a>, :x: <a href='https://freesound.org/people/northern87/sounds/88530/' target='_blank'>rank 4</a>, :white_check_mark: <a href='https://freesound.org/people/HBSA/sounds/158513' target='_blank'>rank 5</a>
+
+**Query 2:** A bunch of birds and other wildlife are making their various noises and sounds. \
 **Results:** :x: <a href='https://freesound.org/people/RTB45/sounds/366669' target='_blank'>rank 1</a>, :x: <a href='https://freesound.org/people/acclivity/sounds/38956' target='_blank'>rank 2</a>, :x: <a href='https://freesound.org/people/kvgarlic/sounds/187763' target='_blank'>rank 3</a>, :x: <a href='https://freesound.org/people/inchadney/sounds/98470' target='_blank'>rank 4</a>, :x: <a href='https://freesound.org/people/adejabor/sounds/157962' target='_blank'>rank 5</a>
-
 
 ## Setting up the environment
 
