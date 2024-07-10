@@ -21,9 +21,10 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 
 
-The following paragraphs illustrate queries and the top-5 matched audio recordings from the ClothoV2 test set.Recordings marked with
+The following paragraphs illustrate queries and the top-5 matched audio recordings from the ClothoV2 test set. Recordings marked with
 - :white_check_mark: are the associated with the caption ($i = j$), and recordings marked with 
-- :x: are associate with another caption ($i \neq j$)
+- :x: are associate with another caption ($i \neq j$).
+
 Use CLTR + click to open the recording in a new tab.
 
 **Query 1:** A large gathering of people are talking loudly with each other. \
