@@ -19,16 +19,13 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 ## Example
 Query: A large gathering of people are talking loudly with each other.
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/344952/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/57595/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/352819/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/88530/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/158513/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/362353/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/179777/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/261472/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/260062/simple/small/" width="375" height="30"></iframe>
-<iframe frameborder="0" scrolling="no" src="https://freesound.org/embed/sound/iframe/326111/simple/small/" width="375" height="30"></iframe>
+
+<audio controls="controls"><source src="https://cdn.freesound.org/previews/344/344952_3474310-lq.mp3" type="audio/mpeg"></audio>
+<audio controls="controls"><source src="https://cdn.freesound.org/previews/57/57595_57789-lq.mp3" type="audio/mpeg"></audio>
+<audio controls="controls"><source src="https://cdn.freesound.org/previews/352/352819_8043-lq.mp3" type="audio/mpeg"></audio>
+<audio controls="controls"><source src="https://cdn.freesound.org/previews/88/88530_1196518-lq.mp3" type="audio/mpeg"></audio>
+<audio controls="controls"><source src="https://cdn.freesound.org/previews/158/158513_2865338-lq.mp3" type="audio/mpeg"></audio>
+
 
 ## Setting up the environment
 
