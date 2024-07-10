@@ -21,27 +21,8 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 
 
-**Query 1:** A large gathering of people are talking loudly with each other. \
-**Results:**
-:x: [rank 1](https://freesound.org/people/ivolipa/sounds/344952), :x: [rank 2](https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595), :x: [rank 3](https://freesound.org/people/dobroide/sounds/352819), :x: [rank 4](https://freesound.org/people/northern87/sounds/88530/), :white_check_mark: [rank 5](https://freesound.org/people/HBSA/sounds/158513)
-
-
 **Query 1:** A bunch of birds and other wildlife are making their various noises and sounds. \
-**Results:**
-:x: [rank 1](https://freesound.org/people/RTB45/sounds/366669), 
-:x: [rank 2](https://freesound.org/people/acclivity/sounds/38956), 
-:x: [rank 3](https://freesound.org/people/kvgarlic/sounds/187763), 
-:x: [rank 4](https://freesound.org/people/inchadney/sounds/98470), 
-:x: [rank 5](https://freesound.org/people/adejabor/sounds/157962),
-
-
-**Query 3:** A radio dispatcher and an officer are communicating over the radio. \
-**Results:**
-:white_check_mark: [rank 1](https://freesound.org/people/Benboncan/sounds/80399), 
-:x: [rank 2](https://freesound.org/people/RobinScemama/sounds/167260), 
-:x: [rank 3](https://freesound.org/people/morgantj/sounds/58381), 
-:x: [rank 4](https://freesound.org/people/cognito&nbsp;perceptu/sounds/79547), 
-:x: [rank 5](https://freesound.org/people/paisagemsonoraunila/sounds/342734)
+**Results:** :x: <a href='https://freesound.org/people/RTB45/sounds/366669' target='_blank'>rank 1</a>, :x: <a href='https://freesound.org/people/acclivity/sounds/38956' target='_blank'>rank 2</a>, :x: <a href='https://freesound.org/people/kvgarlic/sounds/187763' target='_blank'>rank 3</a>, :x: <a href='https://freesound.org/people/inchadney/sounds/98470' target='_blank'>rank 4</a>, :x: <a href='https://freesound.org/people/adejabor/sounds/157962' target='_blank'>rank 5</a>
 
 
 ## Setting up the environment
