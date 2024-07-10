@@ -11,7 +11,7 @@ Our submission [2] to the DCASE Challenge 2024 based on the proposed method, too
 Audio retrieval systems are typically trained on audio–caption datasets (e.g., ClothoV2 [4]), which contain pairs of audios and corresponding descriptions $\\{ (a_i, c_i)\\}_{N=1 \dots N}$.
 Unfortunately, for these datasets, the pairwise correspondence between audio $i$ and caption $j$ is not known for the case $i \neq j$; it is therefor common practice (e.g., during contrastive training and during evaluation) to assume that those pairs do not match.
 
-However, relying on this assumption is not ideal. The following paragraphs show a query and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
+However, relying on this assumption is not ideal. The following paragraph show a query and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
 - Recordings marked with :white_check_mark: are associated with the description ($i = j$), whereas 
 - recordings marked with :grey_question: are associated with another caption ($i \neq j$); we thus do not know if the caption describes the audio.
 
