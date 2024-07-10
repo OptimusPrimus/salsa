@@ -23,8 +23,8 @@ However, relying on this assumption is not ideal. The following paragraphs show 
 **Query 2:** A bunch of birds and other wildlife are making their various noises and sounds. \
 **Results:** :question: <a href='https://freesound.org/people/RTB45/sounds/366669' target='_blank'>rank 1</a>, :question: <a href='https://freesound.org/people/acclivity/sounds/38956' target='_blank'>rank 2</a>, :question: <a href='https://freesound.org/people/kvgarlic/sounds/187763' target='_blank'>rank 3</a>, :question: <a href='https://freesound.org/people/inchadney/sounds/98470' target='_blank'>rank 4</a>, :question: <a href='https://freesound.org/people/adejabor/sounds/157962' target='_blank'>rank 5</a>
 
-This illustrates that **multiple audio recording** in an audio–caption dataset can be relevant for a given query.
-We thus hypothesize that additional correspondence annotations can provide useful guidance during training.
+This illustrates that $a_i$ and $c_j$ can match, even if $i \neq j$.
+We thus argue that additional correspondence annotations are required to give better guidance during training.
 
 ## Estimating Audio–Caption Correspondences
 
@@ -36,6 +36,7 @@ The figure below illustrates the procedure:
 </p>
 
 In **stage 1**, we assume that audio $a_i$ and caption $c_j$ do not match if $i \neq j$ and train the model with contrastive loss $L_{\textrm{sup}}$.
+
 **Stage 2** uses predictions ensembled from several Stage 1 models (bottom left) to estimate the correspondence between $a_i$ and $c_j$; those estimates then serve as prediction targets instead of the ground truth from stage 1. 
 Stage 2 model parameters are initialized with stage 1 parameters, and the corresponding loss is denoted as $L_{\mathrm{dist}}$.
 
