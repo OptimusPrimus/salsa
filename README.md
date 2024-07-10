@@ -18,13 +18,10 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 
 
 ## Example
-Query: A large gathering of people are talking loudly with each other.
+**Query**: A large gathering of people are talking loudly with each other.
+A large gathering of people are talking loudly with each other.
 
-<audio controls="controls" src="https://cdn.freesound.org/previews/344/344952_3474310-lq.mp3" type="audio/mpeg">Cannot be displayed.</audio>
-<audio controls="controls" src="https://cdn.freesound.org/previews/57/57595_57789-lq.mp3" type="audio/mpeg"></audio>
-<audio controls="controls" src="https://cdn.freesound.org/previews/352/352819_8043-lq.mp3" type="audio/mpeg"></audio>
-<audio controls="controls" src="https://cdn.freesound.org/previews/88/88530_1196518-lq.mp3" type="audio/mpeg"></audio>
-<audio controls="controls" src="https://cdn.freesound.org/previews/158/158513_2865338-lq.mp3" type="audio/mpeg"></audio>
+**Ranked Results** : [murmur_on_ferry_3.wav](https://freesound.org/people/ivolipa/sounds/344952), [bar crowd.wav](https://freesound.org/people/cognito&nbsp;perceptu/sounds/57595), [20160820_saluzzo.arcade.04.wav](https://freesound.org/people/dobroide/sounds/352819), [crows_outdoors_northern87.wav](https://freesound.org/people/northern87/sounds/88530/), [young artists.wav](https://freesound.org/people/HBSA/sounds/158513)
 
 ## Setting up the environment
 
