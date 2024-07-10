@@ -20,7 +20,7 @@ Stage 2 model parameters are initialized with stage 1 parameters, and the corres
 ## Example
 Query: A large gathering of people are talking loudly with each other.
 
-<audio controls="controls" src="https://cdn.freesound.org/previews/344/344952_3474310-lq.mp3" type="audio/mpeg"></audio>
+<audio controls="controls" src="https://cdn.freesound.org/previews/344/344952_3474310-lq.mp3" type="audio/mpeg">Cannot be displayed.</audio>
 <audio controls="controls" src="https://cdn.freesound.org/previews/57/57595_57789-lq.mp3" type="audio/mpeg"></audio>
 <audio controls="controls" src="https://cdn.freesound.org/previews/352/352819_8043-lq.mp3" type="audio/mpeg"></audio>
 <audio controls="controls" src="https://cdn.freesound.org/previews/88/88530_1196518-lq.mp3" type="audio/mpeg"></audio>
