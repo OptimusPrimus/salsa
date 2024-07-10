@@ -9,7 +9,8 @@ This repository contains the code to our submission [1, 2] to [task 8](https://d
 
 Our system (illustrated in the figure) transforms audio and descriptions into the shared audio–caption embedding space via the audio and description embedding models $\phi_\mathrm{a}$ and $\phi_\mathrm{c}$, respectively. 
 In stage 1, we assume that audio $a_i$ and caption $c_j$ do not match if $i \neq j$ and train the model with contrastive loss $\mathcal{L}_{\textrm{sup}}$.
-
+Stage 2 uses predictions ensembled from several Stage 1 models (bottom left) to estimate the correspondence between $a_i$ and $c_j$; those estimates then serve as prediction targets instead of the ground truth from stage 1. 
+Stage 2 model parameters are initialized with stage 1 parameters, and the corresponding loss is denoted as $\mathcal{L}_{\mathrm{dist}}$.
 
 <img src="figure.png" alt="system illustration" width="400"/>
 
