@@ -1,10 +1,10 @@
 #!/usr/bin/bash
 
-wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/xaa
-wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/xab
-wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/xac
-wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/xad
-wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/xae
+wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.1.ckpt
+wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.2.ckpt
+wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.3.ckpt
+wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.4.ckpt
+wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.5.ckpt
 
-cat xa* > passt_roberta.ckpt
-rm xa*.ckpt
+cat passt_roberta.*.ckpt > passt_roberta.ckpt
+rm passt_roberta.*.ckpt
