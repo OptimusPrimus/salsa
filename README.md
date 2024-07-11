@@ -59,7 +59,7 @@ Activate the environment:
 
 Download ClothoV2 [[4]](#4):
 - run `scripts/download_clothov2.sh`
-- the script downloads the dataset into a folder called `clothov2`
+- the script downloads the dataset into a folder called `clotho_v2`
 
 
 A checkpoint of the model is available here: 

@@ -1,9 +1,9 @@
 #!/usr/bin/bash
 
 # create folder
-mkdir clothov2
+mkdir clotho_v2
 
-cd clothov2
+cd clotho_v2
 
 # download
 wget -nc https://zenodo.org/records/4743815/files/clotho_audio_development.7z
