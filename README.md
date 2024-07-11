@@ -34,9 +34,10 @@ The figure below illustrates the procedure:
 
 In **stage 1**, we assume that audio $a_i$ and caption $c_j$ do not match if $i \neq j$ and train the model with contrastive loss $L_{\textrm{sup}}$.
 
-**Stage 2** uses predictions ensembled from several Stage 1 models (bottom left) to estimate the correspondence between $a_i$ and $c_j$; those estimates then serve as prediction targets instead of the ground truth from stage 1. 
+**Stage 2** uses predictions ensembled from several Stage 1 models (bottom left) to estimate the correspondence between $a_i$ and $c_j$. Those estimates then serve as prediction targets instead of the ground truth from stage 1. 
 Stage 2 model parameters are initialized with stage 1 parameters, and the corresponding loss is denoted as $L_{\mathrm{dist}}$.
 
+The figure below shows the top 50 correspondences for three queries; the orange bar corresponds to the audio that is associated with the query ($i = j$).
 <p align="center">
 <img src="example_correspondences.png" alt="system illustration" width="1000"/>
 </p>
