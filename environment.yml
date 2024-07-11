@@ -206,6 +206,7 @@ dependencies:
       - click==8.1.7
       - docker-pycreds==0.4.0
       - docopt==0.6.2
+      - einops==0.8.0
       - gensim==4.3.2
       - gitdb==4.0.11
       - gitpython==3.1.43
