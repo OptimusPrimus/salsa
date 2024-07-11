@@ -380,6 +380,8 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
         if len(self.kwargs.get('distill_from', "")):
             for pt_model in self.kwargs['distill_from'].split(";"):
                 out_path = os.path.join(get_model_dir(), pt_model)
+                if not os.path.exists(out_path):
+                    continue
                 if not os.path.exists(os.path.join(out_path, self.kwargs['train_on'] + '_sentence_embeddings_train.pt')):
                     print("embeddings do not exist")
                     # cmd_generate_embeddings(model=None, load_parameters=pt_model)
