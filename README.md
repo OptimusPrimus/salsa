@@ -43,6 +43,7 @@ The following is a description on how to set up a conda environment on Ubuntu 18
 
 Create environment:
 - `conda env create -f environment.yml`
+- `conda activate salsa`
 - `CFLAGS='-O3 -march=native' pip install https://github.com/f0k/minimp3py/archive/master.zip`
 
 Activate the environment:
@@ -92,6 +93,7 @@ rampdown_start=1 \
 train_on=clothov2 \
 seed=409194
 ```
+The result will be stored in the `model_checkpoints` directory.
 
 Estimate correspondences (replace `mild-mountain-1` with the experiment name); the results are stored in the same directory as the checkpoint:
 ```
