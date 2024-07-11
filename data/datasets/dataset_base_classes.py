@@ -12,7 +12,7 @@ import minimp3py
 
 from typing import List, NoReturn, Dict, Union
 
-from utils.directories import directories, get_persistent_cache_dir, get_ram_cache_dir
+from utils.directories import directories, get_persistent_cache_dir
 
 audio_dataset = Ingredient('audio_dataset', ingredients=[directories])
 
@@ -94,19 +94,8 @@ class LoadAudios:
                     mp3s[i] = self.__mp3s__[i]
 
         # copy hd5py file to ram
-        if self.shared:
-            ram_file = os.path.join(get_ram_cache_dir(), filename)
-            print(f"copying {file_path} to {ram_file}\n\n*** Don't forget to delete this file when you're done! ***\n\n")
-            if not os.path.exists(ram_file):
-                available = getattr(psutil.virtual_memory(), 'available')
-                file_size = os.path.getsize(file_path)
-                assert file_size < available, "File is too large to fit into RAM."
-                shutil.copyfile(file_path, ram_file)
-            self.__dataset_file__ = ram_file
-            self.__path_file_map__ = {p: i for i, p in enumerate(unique_paths)}
-        else:
-            self.__dataset_file__ = file_path
-            self.__path_file_map__ = {p: i for i, p in enumerate(unique_paths)}
+        self.__dataset_file__ = file_path
+        self.__path_file_map__ = {p: i for i, p in enumerate(unique_paths)}
 
         self.__hdf5_file__ = None
 
