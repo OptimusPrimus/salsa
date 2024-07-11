@@ -1,5 +1,6 @@
 name: salsa
 channels:
+  - bioconda
   - pytorch
   - nvidia
   - conda-forge
@@ -15,8 +16,8 @@ dependencies:
   - brotli-python=1.0.9=py311ha362b79_8
   - bzip2=1.0.8=h5eee18b_6
   - c-ares=1.19.1=h5eee18b_0
-  - ca-certificates=2024.2.2=hbcca054_0
-  - certifi=2024.2.2=pyhd8ed1ab_0
+  - ca-certificates=2024.7.2=h06a4308_0
+  - certifi=2024.7.4=py311h06a4308_0
   - cffi=1.16.0=py311hb3a22ac_0
   - charset-normalizer=3.3.2=pyhd8ed1ab_0
   - colorama=0.4.6=pyhd8ed1ab_0
@@ -140,7 +141,8 @@ dependencies:
   - numpy-base=1.26.4=py311hf175353_0
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=h3ad879b_0
-  - openssl=3.3.0=h4ab18f5_3
+  - openssl=3.0.14=h5eee18b_0
+  - p7zip=15.09=h2d50403_4
   - pandas=2.2.1=py311ha02d727_0
   - pcre2=10.42=hebb0a14_1
   - pillow=10.3.0=py311h5eee18b_0
@@ -194,47 +196,50 @@ dependencies:
   - x264=1!157.20191217=h7b6447c_0
   - xz=5.4.6=h5eee18b_1
   - yaml=0.2.5=h7b6447c_0
+  - zip=3.0=hd590300_3
   - zipp=3.17.0=pyhd8ed1ab_0
   - zlib=1.2.13=h5eee18b_1
   - zstd=1.5.5=hc292b87_2
   - pip:
-    - chai-sacred==0.8.3
-    - chardet==3.0.4
-    - click==8.1.7
-    - docker-pycreds==0.4.0
-    - docopt==0.6.2
-    - gensim==4.3.2
-    - gitdb==4.0.11
-    - gitpython==3.1.43
-    - googletrans==3.0.0
-    - h11==0.9.0
-    - h2==3.2.0
-    - hpack==3.0.0
-    - hstspreload==2024.6.1
-    - httpcore==0.9.1
-    - httpx==0.13.3
-    - huggingface-hub==0.23.2
-    - hyperframe==5.2.0
-    - idna==2.10
-    - jsonpickle==3.0.4
-    - munch==2.5.0
-    - nltk==3.8.1
-    - packaging==24.0
-    - protobuf==4.25.3
-    - psutil==5.9.8
-    - py-cpuinfo==9.0.0
-    - regex==2024.5.15
-    - rfc3986==1.5.0
-    - safetensors==0.4.3
-    - sentry-sdk==2.3.1
-    - setproctitle==1.3.3
-    - smart-open==7.0.4
-    - smmap==5.0.1
-    - sniffio==1.3.1
-    - textaugment==1.3.4
-    - textblob==0.17.1
-    - timm==0.4.12
-    - tokenizers==0.19.1
-    - transformers==4.41.2
-    - wandb==0.17.0
-    - wrapt==1.16.0
+      - chai-sacred==0.8.3
+      - chardet==3.0.4
+      - click==8.1.7
+      - docker-pycreds==0.4.0
+      - docopt==0.6.2
+      - gensim==4.3.2
+      - gitdb==4.0.11
+      - gitpython==3.1.43
+      - googletrans==3.0.0
+      - h11==0.9.0
+      - h2==3.2.0
+      - hpack==3.0.0
+      - hstspreload==2024.6.1
+      - httpcore==0.9.1
+      - httpx==0.13.3
+      - huggingface-hub==0.23.2
+      - hyperframe==5.2.0
+      - idna==2.10
+      - jsonpickle==3.0.4
+      - minimp3py==0.2.3
+      - munch==2.5.0
+      - nltk==3.8.1
+      - packaging==24.0
+      - protobuf==4.25.3
+      - psutil==5.9.8
+      - py-cpuinfo==9.0.0
+      - regex==2024.5.15
+      - rfc3986==1.5.0
+      - safetensors==0.4.3
+      - sentry-sdk==2.3.1
+      - setproctitle==1.3.3
+      - smart-open==7.0.4
+      - smmap==5.0.1
+      - sniffio==1.3.1
+      - textaugment==1.3.4
+      - textblob==0.17.1
+      - timm==0.4.12
+      - tokenizers==0.19.1
+      - transformers==4.41.2
+      - wandb==0.17.0
+      - wrapt==1.16.0
+prefix: /home/paul/miniconda3/envs/salsa
