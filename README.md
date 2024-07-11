@@ -62,7 +62,7 @@ Download AudioCaps:
 - unfortunately, audio recordings of AudioCaps are not publicly available
 - you can download the data set yourself or reach out to me for the download link (for research purposes only)
 - replace the links in `scripts/download_audiocaps.sh`
-- run `scripts/download_wavcaps.sh`
+- run `scripts/download_audiocaps.sh`
 - the script downloads the compressed dataset into a folder called `tmp`
 
 
