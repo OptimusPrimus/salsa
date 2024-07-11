@@ -6,7 +6,7 @@ directories = Ingredient('directories', ingredients=[project])
 
 @directories.config
 def default_config():
-    data_dir = os.path.join(os.path.expanduser('~'), 'shared')
+    data_dir = os.getcwd() # os.path.join('.')
 
 @directories.capture
 def get_model_dir(data_dir):
@@ -18,7 +18,7 @@ def get_dataset_dir(data_dir):
 
 @directories.capture
 def get_persistent_cache_dir(data_dir):
-    return make_if_not_exits(os.path.join(data_dir, 'tmp'))
+    return make_if_not_exits(data_dir)
 
 @directories.capture
 def get_pretrained_model_dir(data_dir):

@@ -1,9 +1,7 @@
 import os
 import numpy as np
-import torch
 import csv
 import tqdm
-import json
 from data.datasets.dataset_base_classes import audio_dataset, DatasetBaseClass
 
 from sacred import Ingredient
@@ -52,15 +50,6 @@ def get_class_labels_ids(folder_name):
     return labels, ids
 
 
-@audioset.capture
-def get_ancestor_mapping(folder_name):
-    root_dir = os.path.join(get_dataset_dir(), folder_name)
-    metadata_dir = os.path.join(root_dir, 'metadata')
-    with open(os.path.join(metadata_dir, 'ancestors.json'), 'r') as f:
-        ancestors = json.load(f)
-    return ancestors
-
-
 class AudioSetDataset(DatasetBaseClass):
     @audioset.capture
     def __init__(self, folder_name, split='train', compress=True, update_parent_labels=False):
@@ -78,7 +67,6 @@ class AudioSetDataset(DatasetBaseClass):
         # load the labels, create label index mapping
         ###
         self.labels, self.ids = get_class_labels_ids()
-        self.ancestors = get_ancestor_mapping()
         self.lb_to_ix = {label: i for i, label in enumerate(self.labels)}
         self.id_to_ix = {id: i for i, id in enumerate(self.ids)}
         self.ix_to_lb = {i: label for i, label in enumerate(self.labels)}
@@ -141,10 +129,6 @@ class AudioSetDataset(DatasetBaseClass):
             for id in label_ids:
                 ix = self.id_to_ix[id]
                 target[ix] = 1
-                if self.update_parent_labels:
-                    for a in self.ancestors[id]:
-                        ix = self.id_to_ix[a]
-                        target[ix] = 1
             self.targets.append(target)
             if self.split == 'train':
                 path = os.path.join(
@@ -202,7 +186,6 @@ if __name__ == '__main__':
         ds[0]
 
         class_labels = get_class_labels_ids()
-        am = get_ancestor_mapping()
         print(ds)
 
     ex.run()

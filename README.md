@@ -45,9 +45,26 @@ Create environment:
 - `conda env create -f environment.yml`
 - `CFLAGS='-O3 -march=native' pip install https://github.com/f0k/minimp3py/archive/master.zip`
 
+Activate the environment:
+- `conda activate salsa`
+
 Download ClothoV2 [4]:
 - run `scripts/download_clothov2.sh`
 - the script downloads the dataset into a folder called `clothov2`
+
+If you only want to run inference, you can skip the following steps.
+
+Download WavCaps:
+- run `scripts/download_wavcaps.sh`
+- the script downloads the dataset into a folder called `wavcaps`
+
+Download AudioCaps:
+- unfortunately, audio recordings of AudioCaps are not publicly available
+- you can download the data set yourself or reach out to me for the download link (for research purposes only)
+- replace the links in `scripts/download_audiocaps.sh`
+- run `scripts/download_wavcaps.sh`
+- the script downloads the compressed dataset into a folder called `tmp`
+
 
 ## Test our pre-trained model on the ClothoV2 benchmark
 
