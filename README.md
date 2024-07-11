@@ -37,6 +37,11 @@ In **stage 1**, we assume that audio $a_i$ and caption $c_j$ do not match if $i 
 **Stage 2** uses predictions ensembled from several Stage 1 models (bottom left) to estimate the correspondence between $a_i$ and $c_j$; those estimates then serve as prediction targets instead of the ground truth from stage 1. 
 Stage 2 model parameters are initialized with stage 1 parameters, and the corresponding loss is denoted as $L_{\mathrm{dist}}$.
 
+<p align="center">
+<img src="example_correspondences.png" alt="system illustration" width="1000"/>
+</p>
+
+
 ## Setting up the environment
 
 The following is a description on how to set up a conda environment on Ubuntu 18.04 for training and inference. 
