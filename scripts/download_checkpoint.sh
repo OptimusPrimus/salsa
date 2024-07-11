@@ -1,3 +1,4 @@
+#!/usr/bin/bash
 
 wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.1.ckpt
 wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.2.ckpt

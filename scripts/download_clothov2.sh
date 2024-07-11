@@ -1,10 +1,11 @@
+#!/usr/bin/bash
 
 # create folder
 mkdir clothov2
 
 cd clothov2
 
-# unzip
+# download
 wget -nc https://zenodo.org/records/4743815/files/clotho_audio_development.7z
 wget -nc https://zenodo.org/records/4743815/files/clotho_audio_evaluation.7z
 wget -nc https://zenodo.org/records/4743815/files/clotho_audio_validation.7z
