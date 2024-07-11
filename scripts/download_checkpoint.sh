@@ -7,4 +7,4 @@ wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.
 wget https://cloud.cp.jku.at/index.php/s/pMWRbJzXqFPPzgD/download/passt_roberta.5.ckpt
 
 cat passt_roberta.*.ckpt > passt_roberta.ckpt
-rm passt_roberta.*.ckpt
+# rm passt_roberta.*.ckpt
