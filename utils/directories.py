@@ -10,7 +10,7 @@ def default_config():
 
 @directories.capture
 def get_model_dir(data_dir):
-    return make_if_not_exits(os.path.join(data_dir, get_project_name(), 'model_checkpoints'))
+    return make_if_not_exits(os.path.join(data_dir, 'model_checkpoints'))
 
 @directories.capture
 def get_dataset_dir(data_dir):
