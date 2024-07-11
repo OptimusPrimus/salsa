@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 # create folder
+conda activate salsa
 
 python -c """
 from huggingface_hub import snapshot_download
