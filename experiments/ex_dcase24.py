@@ -1089,10 +1089,10 @@ def cmd_generate_embeddings(model=None, load_parameters=None, train_on=None):
 
 
 @audio_retrieval.command
-def cmd_test_on_clothov2(load_model):
+def cmd_test_on_clothov2(load_model, _config):
     print('Initialize model...')
     print(load_model)
-    model = AudioRetrievalModel.load_from_checkpoint(load_model)
+    model = AudioRetrievalModel.load_from_checkpoint(load_model, **_config)
     model.store_predictions = False
     model = model.cuda()
     model.eval()
