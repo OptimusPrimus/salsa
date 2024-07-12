@@ -1,17 +1,17 @@
 # Estimated Audio–Caption Correspondences Improve Language-Based Audio Retrieval
 
-**DISCLAIMER**: Work in progress :construction_worker: :hammer: :nut_and_bolt:
+**DISCLAIMER**: Work is currently under review :mag: :page_facing_up:
 
-This repository contains the implementation of [[1]](#1), which we submitted to the DCASE Workshop 2024 and which is currently under review.
+This repository contains the implementation of [[1]](#1), which we submitted to the DCASE Workshop 2024.
 
 Our submission [[2]](#2) to the DCASE Challenge 2024 based on the proposed method, took the first rank in [task 8](https://dcase.community/challenge2024/task-language-based-audio-retrieval) [[3]](#3).
 
 ## Motivation: Missing Audio–Caption Correspondences
 
 Audio retrieval systems are typically trained on audio–caption datasets (e.g., ClothoV2 [[4]](#4)), which contain pairs of audios and corresponding descriptions $\\{ (a_i, c_i)\\}_{N=1 \dots N}$.
-Unfortunately, for these datasets, the pairwise correspondence between audio $i$ and caption $j$ is not known for the case $i \neq j$; it is therefor common practice (e.g., during contrastive training and during evaluation) to assume that those pairs do not match.
+Unfortunately, for these datasets, the pairwise correspondence between audio $i$ and caption $j$ is not known for the case $i \neq j$; it is, therefore, common practice (e.g., during contrastive training and during evaluation) to assume that those pairs do not match.
 
-However, relying on this assumption is not ideal. The following paragraph show a query and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
+However, relying on this assumption is not ideal. The following paragraph shows a query and the five best-matching audio recordings in the ClothoV2 test set according to our retrieval model. 
 - Recordings marked with :white_check_mark: are associated with the description ($i = j$), whereas 
 - recordings marked with :grey_question: are associated with another caption ($i \neq j$); we thus do not know if the caption describes the audio.
 
@@ -94,7 +94,7 @@ The following section describes training on the ClothoV2 dataset. The section be
 
 Training was done on a single Nvidia A40 GPU.
 
-Setup the environment and download the ClothoV2 dataset as described above .
+Set up the environment and download the ClothoV2 dataset as described above.
 
 Stage 1 training:
 ```
@@ -170,7 +170,7 @@ To further improve the performance, train more stage 1 models (ATST, MN, ...), g
 
 ### Additional Datasets
 
-To achieve state-of-the-art, the system needs to be trained on ClothoV2, AudioCaps, and WavCaps. 
+The system needs to be trained on ClothoV2, AudioCaps, and WavCaps, to achieve state-of-the-art performance.
 
 First, download WavCaps [[5]](#5):
 - run `source scripts/download_wavcaps.sh`
