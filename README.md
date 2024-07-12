@@ -51,7 +51,7 @@ Create environment:
 - `conda env create -f environment.yml`
 - `conda activate salsa`
 - `CFLAGS='-O3 -march=native' pip install https://github.com/f0k/minimp3py/archive/master.zip`
-- `sudo apt-get install p7zip p7zip-full p7zip-rar `
+- `sudo apt-get install p7zip p7zip-full p7zip-rar`
 
 Activate the environment:
 - `conda activate salsa`
@@ -98,18 +98,58 @@ Setup the environment and download the ClothoV2 dataset as described above .
 
 Stage 1 training:
 ```
-TODO
+CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 with \
+data_loader.batch_size=64 \
+data_loader.batch_size_eval=32 \
+audio_features.segment_length=10 \
+audio_features.model=passt \
+sentence_features.model=roberta-large \
+rampdown_type=cosine \
+max_epochs=20 \
+rampdown_stop=15 \
+warmup_length=1 \
+rampdown_start=1 \
+train_on=clothov2 \
+seed=409194
 ```
 The result will be stored in the `model_checkpoints` directory.
 
 Estimate correspondences (replace `mild-mountain-1` with the experiment name); the results are stored in the same directory as the checkpoint:
 ```
-TODO
+MODEL_NAME=mild-mountain-1
+CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 cmd_generate_embeddings with \
+data_loader.batch_size_eval=32 \
+audio_features.segment_length=10 \
+audio_features.model=passt \
+sentence_features.model=roberta-large \
+load_parameters=$MODEL_NAME
 ```
 
 Stage 2 training:
 ```
-TODO
+MODEL_NAME=mild-mountain-1
+CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 cmd_test_on_clothov2 with \
+data_loader.batch_size=64 \
+data_loader.batch_size_eval=32 \
+audio_features.segment_length=10 \
+audio_features.model=passt \
+sentence_features.model=roberta-large \
+lr_audio_encoder=2e-5 \
+lr_audio_project=2e-5 \
+lr_sentence_encoder=2e-5 \
+lr_sentence_project=2e-5 \
+rampdown_type=cosine \
+max_epochs=20 \
+rampdown_stop=15 \
+warmup_length=1 \
+rampdown_start=1 \
+train_on=clothov2 \
+load_parameters=$MODEL_NAME \
+load_last=best \
+loss_weight=0.0 \
+distill_weight=1.0 \
+distill_from=m$MODEL_NAME \
+seed=144272510
 ```
 
 ### Additional Datasets
