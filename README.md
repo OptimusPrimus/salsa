@@ -79,9 +79,18 @@ load_model=passt_roberta.ckpt \
 directories.data_dir=.
 ```
 
+The expected output is:
+
+| map@10 |  R@1  |  R@5  |  R@10 |
+|:------:|:-----:|:-----:|:-----:|
+| 40.11  | 27.69 | 57.05 | 70.50 |
+
+
 ## Training
 
 Training was done on a single Nvidia A40 GPU.
+
+Setup the environment and download the ClothoV2 dataset as described above .
 
 Stage 1 training:
 ```
