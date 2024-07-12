@@ -112,6 +112,13 @@ rampdown_start=1 \
 train_on=clothov2 \
 seed=409194
 ```
+
+The expected performance is:
+
+| map@10 |  R@1  |  R@5  | R@10  |
+|:------:|:-----:|:-----:|:-----:|
+| 28.20  | 17.24 | 42.31 | 56.47 |
+
 The result will be stored in the `model_checkpoints` directory.
 
 Estimate correspondences (replace `mild-mountain-1` with the experiment name); the results are stored in the same directory as the checkpoint:
@@ -128,7 +135,7 @@ load_parameters=$MODEL_NAME
 Stage 2 training:
 ```
 MODEL_NAME=mild-mountain-1
-CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 cmd_test_on_clothov2 with \
+CUDA_VISIBLE_DEVICES=0 python -m experiments.ex_dcase24 with \
 data_loader.batch_size=64 \
 data_loader.batch_size_eval=32 \
 audio_features.segment_length=10 \
@@ -148,9 +155,18 @@ load_parameters=$MODEL_NAME \
 load_last=best \
 loss_weight=0.0 \
 distill_weight=1.0 \
-distill_from=m$MODEL_NAME \
-seed=144272510
+distill_from=$MODEL_NAME \
+seed=523528930
 ```
+
+The test performance should improve to:
+
+| map@10 |  R@1  |  R@5  | R@10  |
+|:------:|:-----:|:-----:|:-----:|
+| 29.94  | 18.48 | 45.58 | 60.40 |
+
+
+To further improve the performance, train more stage 1 models (ATST, MN, ...), generate audio–caption correspondences, and add model names to `distill_from`; this argument takes a list of models, with models separated via a semicolon (;). Use quotes to escape the semicolons, e.g., `"distill_from=model-1;model-2,model-3"`
 
 ### Additional Datasets
 
