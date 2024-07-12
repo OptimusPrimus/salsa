@@ -142,7 +142,6 @@ dependencies:
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=h3ad879b_0
   - openssl=3.0.14=h5eee18b_0
-  - p7zip=15.09=h2d50403_4
   - pandas=2.2.1=py311ha02d727_0
   - pcre2=10.42=hebb0a14_1
   - pillow=10.3.0=py311h5eee18b_0
