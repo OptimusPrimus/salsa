@@ -24,3 +24,5 @@ do
 done
 
 rm clotho_audio_development.7z clotho_audio_evaluation.7z clotho_audio_validation.7z
+
+cd ..

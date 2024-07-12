@@ -27,4 +27,5 @@ mv mnt/fast/nobackup/scratch4weeks/xm00178/WavCaps/data/waveforms/SoundBible_fla
 
 rm -r mnt
 
+cd ..
 

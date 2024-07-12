@@ -15,3 +15,5 @@ cd tmp
 wget https://cloud.cp.jku.at/index.php/s/xxxxxx/download/AudioCaps_val_32000.hdf
 wget https://cloud.cp.jku.at/index.php/s/xxxxxx/download/AudioCaps_test_32000.hdf
 wget https://cloud.cp.jku.at/index.php/s/xxxxxx/download/AudioCaps_train_32000.hdf
+
+cd ..

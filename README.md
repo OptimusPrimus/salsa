@@ -62,7 +62,7 @@ Login to you wandb account:
 ## Test our pre-trained model on the ClothoV2 benchmark
 
 Download ClothoV2 [[4]](#4):
-- run `scripts/download_clothov2.sh`
+- run `source scripts/download_clothov2.sh`
 - the script downloads the dataset into a folder called `clotho_v2`
 
 
@@ -70,7 +70,7 @@ A checkpoint of the model is available here:
 https://cloud.cp.jku.at/index.php/s/ZZkWXQ7f3aXRXYW
 
 Download and ensemble the checkpoint with this command:
-- run `scripts/download_checkpoint.sh`
+- run `source scripts/download_checkpoint.sh`
 
 And then, use this command to test on the ClothoV2 benchmark
 ```
@@ -157,14 +157,14 @@ seed=144272510
 To achieve state-of-the-art, the system needs to be trained on ClothoV2, AudioCaps, and WavCaps. 
 
 First, download WavCaps [[5]](#5):
-- run `scripts/download_wavcaps.sh`
+- run `source scripts/download_wavcaps.sh`
 - the script downloads the dataset into a folder called `wavcaps`
 
 Then download AudioCaps [[6]](#6):
 - unfortunately, audio recordings of AudioCaps are not publicly available
 - you can download the data set yourself or reach out to me for the download link (for research purposes only)
 - replace the links in `scripts/download_audiocaps.sh`
-- run `scripts/download_audiocaps.sh`
+- run `source scripts/download_audiocaps.sh`
 - the script downloads the compressed dataset into a folder called `tmp`
 
 Finally, set flag `train_on=all` in stage 1 (`train_on=clothov2` in stage 2) and repeat the training procedure described above.
