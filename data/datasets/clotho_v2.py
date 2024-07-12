@@ -147,5 +147,8 @@ if __name__ == '__main__':
     @ex.automain
     def main(_config):
         train = get_clotho_v2('train')
+        print(train[7])
+
+    ex.run(config_updates={'directories': {'data_dir': '~/shared'}})
 
 

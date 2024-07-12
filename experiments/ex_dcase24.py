@@ -556,52 +556,6 @@ class AudioRetrievalModel(pl.LightningModule, ABC):
 
         return batch
 
-    def forward_timing(self, batch):
-
-        hard = [c for c in batch['caption_hard'] if c != '']
-        mask = [i for i, c in enumerate(batch['caption_hard']) if c != '']
-
-        if len(hard) == 0:
-            return 0
-
-        hard = torch.nn.functional.normalize(self.forward_sentence({'caption': hard})['sentence_features'][:, 0], p=2, dim=-1)
-        positive = torch.nn.functional.normalize(batch['sentence_features'][:, 0][mask], p=2, dim=-1)
-        audio = torch.nn.functional.normalize(batch['audio_features'][:, 0][mask], p=2, dim=-1)
-
-        hard = (hard * audio).sum(-1)[:, None]
-        positive = (positive * audio).sum(-1)[:, None]
-
-        C = torch.concatenate([positive, hard], dim=1)
-
-        if self.kwargs['ranking_loss_margin'] is not False:
-            difference = C[:, 1] + self.kwargs['ranking_loss_margin'] - C[:, 0] # positive negative
-            loss = torch.maximum(difference, torch.zeros_like(difference)).mean()
-        else:
-            if self.kwargs['timing_loss_margin'] is not None:
-                margin_ok = torch.where(C[:, 1] + self.kwargs['timing_loss_margin'] - C[:, 0] > 0)[0]
-                self.log('train/margin_ok', (C[:, 1] + self.kwargs['timing_loss_margin'] - C[:, 0] > 0).sum() / len(C), sync_dist=True)
-            else:
-                margin_ok = torch.arange(len(C))
-
-            # use_same_tau
-            if self.kwargs['use_same_tau']:
-                tau = torch.abs(self.tau)
-            else:
-                tau = torch.abs(self.timing_tau)
-            self.log('train/tau_timing', tau, sync_dist=True)
-            C = torch.log_softmax(C / tau, dim=1)
-
-
-            loss = - C[margin_ok, 0].sum() / len(C)
-
-        self.log('train/timing_clf', loss.item())
-
-        return self.kwargs['timing_loss_weight'] * loss
-
-
-    def process_filename(self, filename):
-        return filename
-
     def forward(self, batch):
 
         ### forward audio
