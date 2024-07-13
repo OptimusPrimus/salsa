@@ -1,6 +1,6 @@
 # Estimated Audio–Caption Correspondences Improve Language-Based Audio Retrieval
 
-**DISCLAIMER**: Work is currently under review :mag: :page_facing_up:
+**DISCLAIMER**: This work is currently under review :mag: :page_facing_up:
 
 This repository contains the implementation of [[1]](#1), which we submitted to the DCASE Workshop 2024.
 
