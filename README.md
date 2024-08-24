@@ -5,6 +5,8 @@
 This repository contains the implementation of [[1]](#1), which we submitted to the DCASE Workshop 2024.
 
 Our submission [[2]](#2) to the DCASE Challenge 2024 based on the proposed method, took the first rank in [task 8](https://dcase.community/challenge2024/task-language-based-audio-retrieval) [[3]](#3).
+ 	
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/estimated-audio-caption-correspondences/text-to-audio-retrieval-on-clotho)](https://paperswithcode.com/sota/text-to-audio-retrieval-on-clotho?p=estimated-audio-caption-correspondences)
 
 ## Motivation: Missing Audio–Caption Correspondences
 
